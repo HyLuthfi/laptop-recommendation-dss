@@ -15,12 +15,6 @@ css_kustom = """
 
     html, body, [class*="css"]  {
         font-family: 'Plus Jakarta Sans', sans-serif;
-        background-color: #FAFAFA;
-        color: #111827;
-    }
-    
-    .stApp {
-        background-color: #FAFAFA;
     }
 
     .stTabs [data-baseweb="tab-list"] {
