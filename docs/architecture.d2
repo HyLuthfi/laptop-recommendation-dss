@@ -1,0 +1,248 @@
+direction: right
+
+title: {
+  label: "Laptop Recommendation DSS — Multi-Criteria Decision Making (MCDM) Architecture"
+  near: top-center
+  shape: text
+  style: {
+    font-size: 24
+    bold: true
+    font-color: "#f8fafc"
+  }
+}
+
+# ─────────────────────────────────────────
+# DATA INGESTION & FILTERING LAYER
+# ─────────────────────────────────────────
+data_layer: Data Ingestion & Filtering Layer {
+  style: {
+    fill: "#030712"
+    stroke: "#38bdf8"
+    border-radius: 12
+    font-color: "#7dd3fc"
+    bold: true
+  }
+
+  raw_dataset: "Raw Laptop Dataset\n1,304 Commercial Entries\ndataset_laptop_lengkap.csv" {
+    shape: cylinder
+    style: {
+      fill: "#082f49"
+      stroke: "#0284c7"
+      font-color: "#f0f9ff"
+    }
+  }
+
+  user_filter: "User Preference Filter\nMax Budget (200 - 6,000 EUR)\nMin RAM (4 - 64 GB) · Top-N (5 - 20)" {
+    shape: rectangle
+    style: {
+      fill: "#0b1329"
+      stroke: "#0369a1"
+      font-color: "#bae6fd"
+    }
+  }
+
+  decision_matrix: "Decision Matrix X [m x n]\nFiltered Candidate Laptops\n5 Numerical Criteria Extracted" {
+    shape: rectangle
+    style: {
+      fill: "#0b1329"
+      stroke: "#38bdf8"
+      font-color: "#e0f2fe"
+    }
+  }
+
+  raw_dataset -> user_filter: parses & cleans
+  user_filter -> decision_matrix: filters candidate rows
+}
+
+# ─────────────────────────────────────────
+# CRITERIA WEIGHTING ENGINE
+# ─────────────────────────────────────────
+criteria_layer: Criteria Weighting Engine {
+  style: {
+    fill: "#051814"
+    stroke: "#10b981"
+    border-radius: 12
+    font-color: "#6ee7b7"
+    bold: true
+  }
+
+  criteria_weights: "5 Evaluation Criteria\nC1: Price (Cost, w1 = 0.35)\nC2: RAM (Benefit, w2 = 0.20)\nC3: Storage (Benefit, w3 = 0.20)\nC4: Weight (Cost, w4 = 0.15)\nC5: Display (Benefit, w5 = 0.10)" {
+    shape: rectangle
+    style: {
+      fill: "#062e24"
+      stroke: "#059669"
+      font-color: "#a7f3d0"
+    }
+  }
+
+  objective_rules: "Objective Functions\nBenefit: Higher is Better\nCost: Lower is Better" {
+    shape: rectangle
+    style: {
+      fill: "#062e24"
+      stroke: "#10b981"
+      font-color: "#d1fae5"
+    }
+  }
+
+  criteria_weights -> objective_rules: defines optimization type
+}
+
+# ─────────────────────────────────────────
+# TRIPLE MCDM COMPUTATIONAL CORES
+# ─────────────────────────────────────────
+mcdm_cores: Triple MCDM Computational Cores {
+  style: {
+    fill: "#0f172a"
+    stroke: "#818cf8"
+    border-radius: 12
+    font-color: "#c7d2fe"
+    bold: true
+  }
+
+  saw_core: "SAW Core (Simple Additive Weighting)\nLinear Scale Transformation\nBenefit: rij = xij / max(xj)\nCost: rij = min(xj) / xij\nScore: Vi = sum(wj * rij)" {
+    shape: rectangle
+    style: {
+      fill: "#1e1b4b"
+      stroke: "#6366f1"
+      font-color: "#e0e7ff"
+    }
+  }
+
+  topsis_core: "TOPSIS Core (Ideal Solution Distance)\nVector Normalization: rij = xij / sqrt(sum(xij^2))\nWeighted Matrix: yij = wj * rij\nPositive Ideal A+ vs Negative Ideal A-\nEuclidean Distance: D+ and D-\nCloseness: Ci = D- / (D+ + D-)" {
+    shape: rectangle
+    style: {
+      fill: "#1e1b4b"
+      stroke: "#4f46e5"
+      font-color: "#c7d2fe"
+    }
+  }
+
+  waspas_core: "WASPAS Core (Aggregated Sum-Product)\nAdditive Model WSM: Q1 = sum(wj * rij)\nMultiplicative Model WPM: Q2 = prod(rij ^ wj)\nJoint Score: Q = lambda*Q1 + (1-lambda)*Q2\nBalancing Factor: lambda = 0.5" {
+    shape: rectangle
+    style: {
+      fill: "#1e1b4b"
+      stroke: "#818cf8"
+      font-color: "#e0e7ff"
+    }
+  }
+}
+
+# ─────────────────────────────────────────
+# COMPARATIVE ENSEMBLE & RANKING
+# ─────────────────────────────────────────
+ensemble_layer: Comparative Ranking & Consensus {
+  style: {
+    fill: "#191100"
+    stroke: "#f59e0b"
+    border-radius: 12
+    font-color: "#fde68a"
+    bold: true
+  }
+
+  rank_sorter: "Multi-Model Rank Sorter\nSort Descending by Score\nRank 1..N per Algorithm" {
+    shape: rectangle
+    style: {
+      fill: "#451a03"
+      stroke: "#d97706"
+      font-color: "#fef3c7"
+    }
+  }
+
+  consensus_engine: "Consensus Recommendation\nCross-Algorithm Agreement\nRobustness & Sensitivity Check" {
+    shape: hexagon
+    style: {
+      fill: "#451a03"
+      stroke: "#f59e0b"
+      font-color: "#ffffff"
+    }
+  }
+
+  rank_sorter -> consensus_engine: feeds rankings
+}
+
+# ─────────────────────────────────────────
+# STREAMLIT ANALYTICS DASHBOARD
+# ─────────────────────────────────────────
+dashboard_layer: Streamlit Presentation & Analytics UI {
+  style: {
+    fill: "#001219"
+    stroke: "#0891b2"
+    border-radius: 12
+    font-color: "#67e8f9"
+    bold: true
+  }
+
+  app_shell: "Streamlit Web App (:8501)\nClean White Aesthetic\nPlus Jakarta Sans / Outfit Font\nInteractive Sidebar Controls" {
+    shape: rectangle
+    style: {
+      fill: "#083344"
+      stroke: "#06b6d4"
+      font-color: "#a5f3fc"
+    }
+  }
+
+  tabs_suite: "5 Specialized Analytics Tabs\nTab 1: Dashboard Eksekutif (3-Column Leaderboard)\nTab 2: Dekomposisi Algoritma SAW\nTab 3: Dekomposisi Algoritma TOPSIS\nTab 4: Dekomposisi Algoritma WASPAS\nTab 5: Distribusi Grafik Pemeringkatan" {
+    shape: rectangle
+    style: {
+      fill: "#083344"
+      stroke: "#0891b2"
+      font-color: "#67e8f9"
+    }
+  }
+
+  app_shell -> tabs_suite: renders
+}
+
+# ─────────────────────────────────────────
+# DATA FLOW INTERCONNECTIONS
+# ─────────────────────────────────────────
+
+data_layer.decision_matrix -> mcdm_cores.saw_core: "Matrix X [m x n]" {
+  style.stroke: "#38bdf8"
+  style.stroke-width: 2
+}
+
+data_layer.decision_matrix -> mcdm_cores.topsis_core: "Matrix X [m x n]" {
+  style.stroke: "#38bdf8"
+  style.stroke-width: 2
+}
+
+data_layer.decision_matrix -> mcdm_cores.waspas_core: "Matrix X [m x n]" {
+  style.stroke: "#38bdf8"
+  style.stroke-width: 2
+}
+
+criteria_layer.objective_rules -> mcdm_cores.saw_core: "Weights & Cost/Benefit" {
+  style.stroke: "#10b981"
+  style.stroke-width: 2
+}
+
+criteria_layer.objective_rules -> mcdm_cores.topsis_core: "Weights & Cost/Benefit" {
+  style.stroke: "#10b981"
+  style.stroke-width: 2
+}
+
+criteria_layer.objective_rules -> mcdm_cores.waspas_core: "Weights & Cost/Benefit" {
+  style.stroke: "#10b981"
+  style.stroke-width: 2
+}
+
+mcdm_cores.saw_core -> ensemble_layer.rank_sorter: "SAW Scores (Vi)" {
+  style.stroke: "#6366f1"
+  style.stroke-width: 2
+}
+
+mcdm_cores.topsis_core -> ensemble_layer.rank_sorter: "TOPSIS Closeness (Ci)" {
+  style.stroke: "#4f46e5"
+  style.stroke-width: 2
+}
+
+mcdm_cores.waspas_core -> ensemble_layer.rank_sorter: "WASPAS Scores (Qi)" {
+  style.stroke: "#818cf8"
+  style.stroke-width: 2
+}
+
+ensemble_layer.consensus_engine -> dashboard_layer.tabs_suite: "Telemetry & Rankings" {
+  style.stroke: "#f59e0b"
+  style.stroke-width: 2
+}
