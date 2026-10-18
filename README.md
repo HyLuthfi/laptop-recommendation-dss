@@ -36,7 +36,7 @@
 
 ## 🏛️ Arsitektur Sistem Komputasi MCDM
 
-Sistem memproses data melalui pipeline deterministik berlapis: mulai dari parsing dataset mentah, penyaringan batasan pengguna, pembentukan matriks keputusan $X$, kalkulasi paralel 3 engine MCDM, hingga agregasi pemeringkatan konsensus pada UI Streamlit:
+Sistem memproses data melalui pipeline deterministik berlapis: mulai dari parsing dataset mentah, penyaringan batasan pengguna, pembentukan matriks keputusan X, kalkulasi paralel 3 engine MCDM, hingga agregasi pemeringkatan konsensus pada UI Streamlit:
 
 <p align="center">
   <img src="assets/architecture.svg" width="100%" alt="System Architecture Diagram" style="border-radius: 12px; border: 1px solid #1e293b;" />
@@ -50,17 +50,17 @@ Sistem memproses data melalui pipeline deterministik berlapis: mulai dari parsin
   <tr>
     <td width="50%" valign="top">
       <b>🎯 Dynamic Budgeting & Spec Filtering</b><br/>
-      Menyaring 1.304 data laptop komersial secara <i>real-time</i> berdasarkan batasan anggaran maksimum (200 – 6.000 EUR), kapasitas RAM minimum (4 – 64 GB), serta populasi alternatif evaluasi (5 – 20 kandidat) untuk membentuk matriks keputusan $X_{m \times n}$ yang relevan dengan preferensi pengguna.
+      Menyaring 1.304 data laptop komersial secara <i>real-time</i> berdasarkan batasan anggaran maksimum (200 – 6.000 EUR), kapasitas RAM minimum (4 – 64 GB), serta populasi alternatif evaluasi (5 – 20 kandidat) untuk membentuk matriks keputusan X berdimensi m × n yang relevan dengan preferensi pengguna.
     </td>
     <td width="50%" valign="top">
       <b>🧮 Triple MCDM Algorithmic Engines</b><br/>
-      Mengeksekusi tiga paradigma optimasi multi-kriteria secara simultan: <b>SAW</b> (skala aditif linear), <b>TOPSIS</b> (jarak geometris Euclidean ke solusi ideal positif dan negatif), dan <b>WASPAS</b> (hibrida WSM aditif dan WPM multiplikatif eksponensial dengan $\lambda = 0.5$).
+      Mengeksekusi tiga paradigma optimasi multi-kriteria secara simultan: <b>SAW</b> (skala aditif linear), <b>TOPSIS</b> (jarak geometris Euclidean ke solusi ideal positif dan negatif), dan <b>WASPAS</b> (hibrida WSM aditif dan WPM multiplikatif eksponensial dengan parameter agregasi λ = 0.5).
     </td>
   </tr>
   <tr>
     <td width="50%" valign="top">
       <b>🔍 Dekomposisi Perhitungan Matematis Transparan</b><br/>
-      Setiap tahapan aljabar linier dibuka secara eksplisit pada tab terpisah: Matriks Normalisasi $R$, Matriks Terbobot $Y$, Titik Solusi Ideal $A^+ / A^-$, Jarak Geometris $D^+ / D^-$, hingga Skor Agregasi Akhir. Menjamin prinsip <i>Explainable AI / Auditable DSS</i> tanpa kotak hitam (*black-box*).
+      Setiap tahapan aljabar linier dibuka secara eksplisit pada tab terpisah: Matriks Normalisasi R, Matriks Terbobot Y, Titik Solusi Ideal A⁺ / A⁻, Jarak Geometris D⁺ / D⁻, hingga Skor Agregasi Akhir Q. Menjamin prinsip <i>Explainable AI / Auditable DSS</i> tanpa kotak hitam (*black-box*).
     </td>
     <td width="50%" valign="top">
       <b>📊 Analisis Konsensus & Validasi Silang</b><br/>
@@ -83,34 +83,36 @@ Sistem memproses data melalui pipeline deterministik berlapis: mulai dari parsin
 
 ## 🧮 Matriks Perbandingan Formula Matematis MCDM
 
-Ketiga algoritma mengevaluasi matriks keputusan dasar $X = [x_{ij}]_{m \times n}$ di mana $m$ adalah jumlah laptop kandidat dan $n = 5$ adalah jumlah kriteria:
+Ketiga algoritma mengevaluasi matriks keputusan dasar `X = [x_ij]` berdimensi `m × n` di mana `m` adalah jumlah laptop kandidat dan `n = 5` adalah jumlah kriteria:
 
 | Komponen Evaluasi | Simple Additive Weighting (SAW) | TOPSIS (Similarity to Ideal Solution) | WASPAS (Aggregated Sum-Product) |
 |---|---|---|---|
-| **Metode Normalisasi ($r_{ij}$)** | Transformasi Skala Linear:<br/>• Benefit: $r_{ij} = \frac{x_{ij}}{\max_k x_{kj}}$<br/>• Cost: $r_{ij} = \frac{\min_k x_{kj}}{x_{ij}}$ | Normalisasi Vektor Euclidean:<br/>$r_{ij} = \frac{x_{ij}}{\sqrt{\sum_{k=1}^m x_{kj}^2}}$ | Transformasi Skala Linear SAW:<br/>• Benefit: $r_{ij} = \frac{x_{ij}}{\max_k x_{kj}}$<br/>• Cost: $r_{ij} = \frac{\min_k x_{kj}}{x_{ij}}$ |
-| **Pembobotan Matriks** | Dikalikan langsung saat penjumlahan akhir | Matriks Terbobot:<br/>$y_{ij} = w_j \cdot r_{ij}$ | Diterapkan terpisah pada model WSM dan WPM |
-| **Model Preferensi** | **Penjumlahan Terbobot Linear (WSM):**<br/>$V_i = \sum_{j=1}^n w_j \cdot r_{ij}$ | **Kedekatan Relatif Geometris:**<br/>$C_i = \frac{D_i^-}{D_i^+ + D_i^-}$ | **Kombinasi Hibrida Aditif-Multiplikatif:**<br/>$Q_i = \lambda Q_i^{(1)} + (1 - \lambda) Q_i^{(2)}$ |
-| **Titik Acuan Ekstrem** | Nilai lokal $\max$ dan $\min$ per kolom | • $A_j^+ = \max y_{ij}$ (benefit) / $\min y_{ij}$ (cost)<br/>• $A_j^- = \min y_{ij}$ (benefit) / $\max y_{ij}$ (cost) | Nilai lokal $\max$ dan $\min$ per kolom |
-| **Jarak Geometris** | Tidak menggunakan metrik jarak | • $D_i^+ = \sqrt{\sum_{j=1}^n (y_{ij} - A_j^+)^2}$<br/>• $D_i^- = \sqrt{\sum_{j=1}^n (y_{ij} - A_j^-)^2}$ | Tidak menggunakan metrik jarak |
-| **Komponen Pendukung** | — | — | • WSM: $Q_i^{(1)} = \sum_{j=1}^n w_j r_{ij}$<br/>• WPM: $Q_i^{(2)} = \prod_{j=1}^n (r_{ij})^{w_j}$<br/>• Parameter $\lambda = 0.5$ |
-| **Kompleksitas Waktu** | $\mathcal{O}(m \cdot n)$ | $\mathcal{O}(m \cdot n)$ | $\mathcal{O}(m \cdot n)$ |
+| **Metode Normalisasi (`r_ij`)** | **Transformasi Skala Linear:**<br/>• Benefit: `r_ij = x_ij / max(x_j)`<br/>• Cost: `r_ij = min(x_j) / x_ij` | **Normalisasi Vektor Euclidean:**<br/>`r_ij = x_ij / √(Σ x_kj²)` | **Transformasi Skala Linear SAW:**<br/>• Benefit: `r_ij = x_ij / max(x_j)`<br/>• Cost: `r_ij = min(x_j) / x_ij` |
+| **Pembobotan Matriks** | Dikalikan langsung saat penjumlahan akhir | **Matriks Terbobot:**<br/>`y_ij = w_j × r_ij` | Diterapkan terpisah pada model WSM dan WPM |
+| **Model Preferensi** | **Penjumlahan Terbobot Linear (WSM):**<br/>`V_i = Σ (w_j × r_ij)` | **Kedekatan Relatif Geometris:**<br/>`C_i = D_i⁻ / (D_i⁺ + D_i⁻)` | **Kombinasi Hibrida Aditif-Multiplikatif:**<br/>`Q_i = 0.5 × Q_i⁽¹⁾ + 0.5 × Q_i⁽²⁾` |
+| **Titik Acuan Ekstrem** | Nilai lokal `max` dan `min` per kolom | • `A⁺ = max(y_ij)` (Benefit) / `min(y_ij)` (Cost)<br/>• `A⁻ = min(y_ij)` (Benefit) / `max(y_ij)` (Cost) | Nilai lokal `max` dan `min` per kolom |
+| **Jarak Geometris** | Tidak menggunakan metrik jarak | • `D_i⁺ = √[ Σ (y_ij - A_j⁺)² ]`<br/>• `D_i⁻ = √[ Σ (y_ij - A_j⁻)² ]` | Tidak menggunakan metrik jarak |
+| **Komponen Pendukung** | — | — | • WSM: `Q_i⁽¹⁾ = Σ (w_j × r_ij)`<br/>• WPM: `Q_i⁽²⁾ = Π (r_ij)^(w_j)`<br/>• Parameter `λ = 0.5` |
+| **Kompleksitas Waktu** | `O(m × n)` | `O(m × n)` | `O(m × n)` |
 | **Karakteristik Utama** | Intuitif, cepat, sensitif terhadap skala linear | Kuat terhadap alternatif kompromi ekstrem | Menyeimbangkan trade-off penjumlahan dan perkalian eksponensial |
 
 <p align="center"><img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%"></p>
 
 ## 📋 Definisi Kriteria & Pembobotan Sistem
 
-Sistem mengadopsi 5 parameter teknis laptop dengan total bobot ternormalisasi $\sum_{j=1}^5 w_j = 1.00$:
+Sistem mengadopsi 5 parameter teknis laptop dengan total bobot ternormalisasi `Σ w_j = 1.00`:
 
-| Kode | Kriteria Evaluasi | Tipe Atribut | Bobot ($w_j$) | Satuan | Deskripsi Operasional |
+| Kode | Kriteria Evaluasi | Tipe Atribut | Bobot (`w_j`) | Satuan | Deskripsi Operasional |
 |:---:|---|:---:|:---:|:---:|---|
-| **$C_1$** | **Harga (Price)** | **Cost** | **0.35 (35%)** | Euros (€) | Nilai yang semakin rendah diprioritaskan untuk efisiensi anggaran. |
-| **$C_2$** | **Kapasitas RAM** | **Benefit** | **0.20 (20%)** | GB | Kapasitas memori kerja yang semakin besar diprioritaskan untuk multitasking. |
-| **$C_3$** | **Kapasitas Storage** | **Benefit** | **0.20 (20%)** | GB | Total ruang penyimpanan SSD/HDD internal (TB dikonversi ke ribuan GB). |
-| **$C_4$** | **Bobot (Weight)** | **Cost** | **0.15 (15%)** | Kilogram (kg) | Berat perangkat fisik; semakin ringan semakin portabel untuk mobilitas kerja. |
-| **$C_5$** | **Ukuran Layar** | **Benefit** | **0.10 (10%)** | Inci (") | Dimensi diagonal layar visual untuk kenyamanan produktivitas kerja. |
+| **C1** | **Harga (Price)** | **Cost** | **0.35 (35%)** | Euros (€) | Nilai yang semakin rendah diprioritaskan untuk efisiensi anggaran. |
+| **C2** | **Kapasitas RAM** | **Benefit** | **0.20 (20%)** | GB | Kapasitas memori kerja yang semakin besar diprioritaskan untuk multitasking. |
+| **C3** | **Kapasitas Storage** | **Benefit** | **0.20 (20%)** | GB | Total ruang penyimpanan SSD/HDD internal (TB dikonversi ke ribuan GB). |
+| **C4** | **Bobot (Weight)** | **Cost** | **0.15 (15%)** | Kilogram (kg) | Berat perangkat fisik; semakin ringan semakin portabel untuk mobilitas kerja. |
+| **C5** | **Ukuran Layar** | **Benefit** | **0.10 (10%)** | Inci (") | Dimensi diagonal layar visual untuk kenyamanan produktivitas kerja. |
 
-$$\text{Fungsi Kriteria Cost: } r_{ij} = \frac{\min_k x_{kj}}{x_{ij}} \quad \Big| \quad \text{Fungsi Kriteria Benefit: } r_{ij} = \frac{x_{ij}}{\max_k x_{kj}}$$
+> **Formulasi Fungsi Objektif:**
+> - **Atribut Cost (Makin Rendah Makin Baik):** `r_ij = min(x_j) / x_ij`
+> - **Atribut Benefit (Makin Tinggi Makin Baik):** `r_ij = x_ij / max(x_j)`
 
 <p align="center"><img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%"></p>
 
@@ -118,18 +120,24 @@ $$\text{Fungsi Kriteria Cost: } r_{ij} = \frac{\min_k x_{kj}}{x_{ij}} \quad \Big
 
 Untuk menguji integritas komputasi, perhatikan contoh simulasi numerik 3 laptop kandidat berikut:
 
-### 1. Matriks Keputusan Awal ($X$)
-| Alternatif | Harga ($C_1$, Cost) | RAM ($C_2$, Benefit) | Storage ($C_3$, Benefit) | Berat ($C_4$, Cost) | Layar ($C_5$, Benefit) |
+### 1. Matriks Keputusan Awal (`X`)
+| Alternatif | Harga (C1, Cost) | RAM (C2, Benefit) | Storage (C3, Benefit) | Berat (C4, Cost) | Layar (C5, Benefit) |
 |---|:---:|:---:|:---:|:---:|:---:|
 | **Laptop A** | € 500 | 8 GB | 256 GB | 1.8 kg | 14.0" |
 | **Laptop B** | € 800 | 16 GB | 512 GB | 1.5 kg | 15.6" |
 | **Laptop C** | € 1.200 | 16 GB | 1.000 GB | 2.1 kg | 15.6" |
-| **Nilai Ekstrem** | $\min = 500$ | $\max = 16$ | $\max = 1000$ | $\min = 1.5$ | $\max = 15.6$ |
+| **Nilai Ekstrem** | `min = 500` | `max = 16` | `max = 1000` | `min = 1.5` | `max = 15.6` |
 
-### 2. Normalisasi Matriks SAW ($R$) & Skor Preferensi ($V$)
-- $r_{A1} = \frac{500}{500} = 1.0000 \quad|\quad r_{A2} = \frac{8}{16} = 0.5000 \quad|\quad r_{A3} = \frac{256}{1000} = 0.2560 \quad|\quad r_{A4} = \frac{1.5}{1.8} = 0.8333 \quad|\quad r_{A5} = \frac{14.0}{15.6} = 0.8974$
-- **Skor SAW ($V_A$):** $(1.0 \times 0.35) + (0.5 \times 0.20) + (0.256 \times 0.20) + (0.8333 \times 0.15) + (0.8974 \times 0.10) = \mathbf{0.7159}$
-- **Hasil Pemeringkatan:** Laptop B sering keluar sebagai konsensus ideal karena menyeimbangkan harga moderat, RAM tinggi, dan bobot ringan.
+### 2. Normalisasi Matriks SAW (`R`) & Skor Preferensi (`V`)
+- Normalisasi baris Laptop A:
+  - `r_A1 = 500 / 500 = 1.0000` (Cost)
+  - `r_A2 = 8 / 16 = 0.5000` (Benefit)
+  - `r_A3 = 256 / 1000 = 0.2560` (Benefit)
+  - `r_A4 = 1.5 / 1.8 = 0.8333` (Cost)
+  - `r_A5 = 14.0 / 15.6 = 0.8974` (Benefit)
+- **Kalkulasi Skor SAW (`V_A`):**
+  `V_A = (1.0000 × 0.35) + (0.5000 × 0.20) + (0.2560 × 0.20) + (0.8333 × 0.15) + (0.8974 × 0.10) = 0.7159`
+- **Hasil Pemeringkatan:** Laptop B keluar sebagai konsensus ideal karena menyeimbangkan harga moderat, RAM tinggi, dan bobot ringan.
 
 <p align="center"><img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%"></p>
 
