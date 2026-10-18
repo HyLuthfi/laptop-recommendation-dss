@@ -37,13 +37,9 @@
   <!-- CARD 1: SAW (Simple Additive Weighting) -->
   <!-- ========================================================================= -->
   <g transform="translate(30, 95)" filter="url(#cardShadow)">
-    <!-- Panel Background -->
     <rect width="320" height="595" rx="10" fill="url(#sawGrad)" stroke="#1e293b" stroke-width="1.5" />
-    <!-- Top Accent Bar -->
-    <path d="M0,10 Q0,0 10,0 L310,0 Q320,0 320,10 L320,4 Q320,0 310,0 L10,0 Q0,0 0,4 Z" fill="#38bdf8" />
     <rect x="0" y="0" width="320" height="3" fill="#38bdf8" />
     
-    <!-- Card Header -->
     <rect x="16" y="14" width="60" height="18" rx="4" fill="#0369a1" />
     <text x="46" y="27" text-anchor="middle" font-size="10" font-weight="700" fill="#e0f2fe">MODEL 1</text>
     <text x="16" y="52" font-size="16" font-weight="700" fill="#f0f6fc">SAW</text>
@@ -52,18 +48,18 @@
     <line x1="16" y1="94" x2="304" y2="94" stroke="#1e293b" stroke-width="1" />
 
     <!-- 1. Normalisasi -->
-    <text x="16" y="114" font-size="11" font-weight="700" fill="#94a3b8">1. NORMALISASI SKALA LINIER (r<tspan font-size="8" dy="2">ij</tspan><tspan font-size="11" dy="-2">)</tspan></text>
+    <text x="16" y="114" font-size="11" font-weight="700" fill="#94a3b8">1. NORMALISASI SKALA LINIER (rij)</text>
     
     <!-- Benefit Formula -->
     <rect x="16" y="124" width="288" height="66" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1" />
     <text x="26" y="142" font-size="10" font-weight="600" fill="#34d399">• Kriteria Benefit (Keuntungan):</text>
     <g transform="translate(42, 150)">
-      <text x="0" y="20" font-size="13" font-weight="600" fill="#f0f6fc" font-family="'Courier New', monospace">r<tspan font-size="9" dy="3">ij</tspan><tspan font-size="13" dy="-3"> =</tspan></text>
+      <text x="0" y="20" font-size="13" font-weight="600" fill="#f0f6fc" font-family="'Courier New', monospace">rij =</text>
       <!-- Fraction -->
       <g transform="translate(45, 0)">
-        <text x="35" y="14" text-anchor="middle" font-size="12" font-weight="600" fill="#38bdf8" font-family="'Courier New', monospace">x<tspan font-size="9" dy="2">ij</tspan></text>
+        <text x="35" y="14" text-anchor="middle" font-size="12" font-weight="600" fill="#38bdf8" font-family="'Courier New', monospace">xij</text>
         <line x1="0" y1="20" x2="70" y2="20" stroke="#f0f6fc" stroke-width="1.2" />
-        <text x="35" y="33" text-anchor="middle" font-size="11" font-weight="600" fill="#f0f6fc" font-family="'Courier New', monospace">max(x<tspan font-size="8" dy="2">kj</tspan><tspan font-size="11" dy="-2">)</tspan></text>
+        <text x="35" y="33" text-anchor="middle" font-size="11" font-weight="600" fill="#f0f6fc" font-family="'Courier New', monospace">max(xkj)</text>
       </g>
     </g>
 
@@ -71,28 +67,28 @@
     <rect x="16" y="196" width="288" height="66" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1" />
     <text x="26" y="214" font-size="10" font-weight="600" fill="#f87171">• Kriteria Cost (Biaya/Beban):</text>
     <g transform="translate(42, 222)">
-      <text x="0" y="20" font-size="13" font-weight="600" fill="#f0f6fc" font-family="'Courier New', monospace">r<tspan font-size="9" dy="3">ij</tspan><tspan font-size="13" dy="-3"> =</tspan></text>
+      <text x="0" y="20" font-size="13" font-weight="600" fill="#f0f6fc" font-family="'Courier New', monospace">rij =</text>
       <!-- Fraction -->
       <g transform="translate(45, 0)">
-        <text x="35" y="14" text-anchor="middle" font-size="11" font-weight="600" fill="#f0f6fc" font-family="'Courier New', monospace">min(x<tspan font-size="8" dy="2">kj</tspan><tspan font-size="11" dy="-2">)</tspan></text>
+        <text x="35" y="14" text-anchor="middle" font-size="11" font-weight="600" fill="#f0f6fc" font-family="'Courier New', monospace">min(xkj)</text>
         <line x1="0" y1="20" x2="70" y2="20" stroke="#f0f6fc" stroke-width="1.2" />
-        <text x="35" y="33" text-anchor="middle" font-size="12" font-weight="600" fill="#f87171" font-family="'Courier New', monospace">x<tspan font-size="9" dy="2">ij</tspan></text>
+        <text x="35" y="33" text-anchor="middle" font-size="12" font-weight="600" fill="#f87171" font-family="'Courier New', monospace">xij</text>
       </g>
     </g>
 
     <!-- 2. Pembobotan & Nilai Preferensi -->
-    <text x="16" y="286" font-size="11" font-weight="700" fill="#94a3b8">2. PREFERENSI AKHIR (V<tspan font-size="8" dy="2">i</tspan><tspan font-size="11" dy="-2">)</tspan></text>
+    <text x="16" y="286" font-size="11" font-weight="700" fill="#94a3b8">2. PREFERENSI AKHIR (Vi)</text>
     <rect x="16" y="296" width="288" height="74" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1" />
     <text x="26" y="315" font-size="10" font-weight="600" fill="#e2e8f0">Penjumlahan Terbobot (Weighted Sum Model):</text>
     <g transform="translate(65, 332)">
-      <text x="0" y="22" font-size="16" font-weight="700" fill="#38bdf8" font-family="'Courier New', monospace">V<tspan font-size="11" dy="4">i</tspan><tspan font-size="16" dy="-4"> = </tspan></text>
+      <text x="0" y="22" font-size="16" font-weight="700" fill="#38bdf8" font-family="'Courier New', monospace">Vi = </text>
       <!-- Sigma -->
       <g transform="translate(42, 2)">
         <text x="12" y="24" text-anchor="middle" font-size="24" font-weight="400" fill="#f0f6fc">∑</text>
         <text x="12" y="4" text-anchor="middle" font-size="9" fill="#94a3b8">n</text>
         <text x="12" y="33" text-anchor="middle" font-size="8" fill="#94a3b8">j=1</text>
       </g>
-      <text x="72" y="22" font-size="14" font-weight="600" fill="#f0f6fc" font-family="'Courier New', monospace">w<tspan font-size="10" dy="3">j</tspan><tspan font-size="14" dy="-3"> · r</tspan><tspan font-size="10" dy="3">ij</tspan></text>
+      <text x="72" y="22" font-size="14" font-weight="600" fill="#f0f6fc" font-family="'Courier New', monospace">wj · rij</text>
     </g>
 
     <!-- 3. Karakteristik & Ringkasan -->
@@ -114,12 +110,9 @@
   <!-- CARD 2: TOPSIS (Ideal Solution Distance) -->
   <!-- ========================================================================= -->
   <g transform="translate(380, 95)" filter="url(#cardShadow)">
-    <!-- Panel Background -->
     <rect width="320" height="595" rx="10" fill="url(#topsisGrad)" stroke="#1e293b" stroke-width="1.5" />
-    <!-- Top Accent Bar -->
     <rect x="0" y="0" width="320" height="3" fill="#34d399" />
     
-    <!-- Card Header -->
     <rect x="16" y="14" width="60" height="18" rx="4" fill="#065f46" />
     <text x="46" y="27" text-anchor="middle" font-size="10" font-weight="700" fill="#d1fae5">MODEL 2</text>
     <text x="16" y="52" font-size="16" font-weight="700" fill="#f0f6fc">TOPSIS</text>
@@ -131,17 +124,16 @@
     <text x="16" y="114" font-size="11" font-weight="700" fill="#94a3b8">1. NORMALISASI VEKTOR EUCLIDEAN</text>
     <rect x="16" y="124" width="288" height="66" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1" />
     <g transform="translate(32, 134)">
-      <text x="0" y="26" font-size="13" font-weight="600" fill="#f0f6fc" font-family="'Courier New', monospace">r<tspan font-size="9" dy="3">ij</tspan><tspan font-size="13" dy="-3"> =</tspan></text>
-      <!-- Fraction with Radical -->
+      <text x="0" y="26" font-size="13" font-weight="600" fill="#f0f6fc" font-family="'Courier New', monospace">rij =</text>
       <g transform="translate(44, 4)">
-        <text x="48" y="14" text-anchor="middle" font-size="12" font-weight="600" fill="#34d399" font-family="'Courier New', monospace">x<tspan font-size="9" dy="2">ij</tspan></text>
+        <text x="48" y="14" text-anchor="middle" font-size="12" font-weight="600" fill="#34d399" font-family="'Courier New', monospace">xij</text>
         <line x1="0" y1="20" x2="98" y2="20" stroke="#f0f6fc" stroke-width="1.2" />
         <!-- Sqrt expression -->
         <g transform="translate(4, 25)">
           <text x="0" y="14" font-size="16" fill="#34d399">√</text>
           <line x1="12" y1="4" x2="88" y2="4" stroke="#34d399" stroke-width="1.2" />
           <text x="16" y="14" font-size="16" fill="#f0f6fc">∑</text>
-          <text x="32" y="14" font-size="11" font-weight="600" fill="#f0f6fc" font-family="'Courier New', monospace">x<tspan font-size="8" dy="2">kj</tspan><tspan font-size="9" dy="-5">2</tspan></text>
+          <text x="32" y="14" font-size="11" font-weight="600" fill="#f0f6fc" font-family="'Courier New', monospace">xkj²</text>
         </g>
       </g>
     </g>
@@ -150,25 +142,23 @@
     <text x="16" y="208" font-size="11" font-weight="700" fill="#94a3b8">2. SOLUSI IDEAL POSITIF &amp; NEGATIF</text>
     <rect x="16" y="218" width="288" height="74" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1" />
     <g transform="translate(24, 236)" font-size="10" font-family="'Courier New', monospace">
-      <text y="0" fill="#c9d1d9"><tspan font-weight="700" fill="#f0f6fc">y<tspan font-size="8" dy="2">ij</tspan><tspan font-size="10" dy="-2"> = w</tspan><tspan font-size="8" dy="2">j</tspan><tspan font-size="10" dy="-2"> · r</tspan><tspan font-size="8" dy="2">ij</tspan></tspan> (Matriks Terbobot)</text>
-      <text y="20" fill="#34d399"><tspan font-weight="700">A⁺</tspan> = {max(y<tspan font-size="7" dy="2">ij</tspan><tspan font-size="10" dy="-2">|benefit), min(y</tspan><tspan font-size="7" dy="2">ij</tspan><tspan font-size="10" dy="-2">|cost)}</tspan></text>
-      <text y="38" fill="#f87171"><tspan font-weight="700">A⁻</tspan> = {min(y<tspan font-size="7" dy="2">ij</tspan><tspan font-size="10" dy="-2">|benefit), max(y</tspan><tspan font-size="7" dy="2">ij</tspan><tspan font-size="10" dy="-2">|cost)}</tspan></text>
+      <text y="0" fill="#c9d1d9"><tspan font-weight="700" fill="#f0f6fc">yij = wj · rij</tspan> (Matriks Terbobot)</text>
+      <text y="20" fill="#34d399"><tspan font-weight="700">A⁺</tspan> = {max(yij|benefit), min(yij|cost)}</text>
+      <text y="38" fill="#f87171"><tspan font-weight="700">A⁻</tspan> = {min(yij|benefit), max(yij|cost)}</text>
     </g>
 
     <!-- 3. Jarak Euclidean & Kedekatan Relatif -->
-    <text x="16" y="310" font-size="11" font-weight="700" fill="#94a3b8">3. JARAK EUCLIDEAN &amp; KEDEKATAN (C<tspan font-size="8" dy="2">i</tspan><tspan font-size="11" dy="-2">)</tspan></text>
+    <text x="16" y="310" font-size="11" font-weight="700" fill="#94a3b8">3. JARAK EUCLIDEAN &amp; KEDEKATAN (Ci)</text>
     <rect x="16" y="320" width="288" height="96" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1" />
-    <!-- Di+ / Di- -->
     <g transform="translate(24, 338)">
-      <text x="0" y="10" font-size="10" font-weight="600" fill="#94a3b8" font-family="'Courier New', monospace">D<tspan font-size="8" dy="2">i</tspan><tspan font-size="8" dy="-4">±</tspan><tspan font-size="10" dy="2"> = √[ ∑ (y</tspan><tspan font-size="7" dy="2">ij</tspan><tspan font-size="10" dy="-2"> - A</tspan><tspan font-size="7" dy="2">j</tspan><tspan font-size="7" dy="-4">±</tspan><tspan font-size="10" dy="2">)² ]</tspan></text>
+      <text x="0" y="10" font-size="10" font-weight="600" fill="#94a3b8" font-family="'Courier New', monospace">Di± = √[ ∑ (yij - Aj±)² ]</text>
     </g>
-    <!-- Ci fraction -->
     <g transform="translate(42, 360)">
-      <text x="0" y="24" font-size="15" font-weight="700" fill="#34d399" font-family="'Courier New', monospace">C<tspan font-size="10" dy="3">i</tspan><tspan font-size="15" dy="-3"> =</tspan></text>
+      <text x="0" y="24" font-size="15" font-weight="700" fill="#34d399" font-family="'Courier New', monospace">Ci =</text>
       <g transform="translate(40, 0)">
-        <text x="50" y="14" text-anchor="middle" font-size="13" font-weight="600" fill="#f87171" font-family="'Courier New', monospace">D<tspan font-size="9" dy="2">i</tspan><tspan font-size="9" dy="-4">−</tspan></text>
+        <text x="50" y="14" text-anchor="middle" font-size="13" font-weight="600" fill="#f87171" font-family="'Courier New', monospace">Di−</text>
         <line x1="0" y1="21" x2="100" y2="21" stroke="#f0f6fc" stroke-width="1.2" />
-        <text x="50" y="35" text-anchor="middle" font-size="12" font-weight="600" fill="#f0f6fc" font-family="'Courier New', monospace">D<tspan font-size="9" dy="2">i</tspan><tspan font-size="9" dy="-4">+</tspan><tspan font-size="12" dy="2"> + D</tspan><tspan font-size="9" dy="2">i</tspan><tspan font-size="9" dy="-4">−</tspan></text>
+        <text x="50" y="35" text-anchor="middle" font-size="12" font-weight="600" fill="#f0f6fc" font-family="'Courier New', monospace">Di+ + Di−</text>
       </g>
     </g>
 
@@ -189,12 +179,9 @@
   <!-- CARD 3: WASPAS (Weighted Aggregated Sum Product Assessment) -->
   <!-- ========================================================================= -->
   <g transform="translate(730, 95)" filter="url(#cardShadow)">
-    <!-- Panel Background -->
     <rect width="320" height="595" rx="10" fill="url(#waspasGrad)" stroke="#1e293b" stroke-width="1.5" />
-    <!-- Top Accent Bar -->
     <rect x="0" y="0" width="320" height="3" fill="#a78bfa" />
     
-    <!-- Card Header -->
     <rect x="16" y="14" width="60" height="18" rx="4" fill="#5b21b6" />
     <text x="46" y="27" text-anchor="middle" font-size="10" font-weight="700" fill="#ede9fe">MODEL 3</text>
     <text x="16" y="52" font-size="16" font-weight="700" fill="#f0f6fc">WASPAS</text>
@@ -209,14 +196,14 @@
     <rect x="16" y="124" width="288" height="54" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1" />
     <g transform="translate(24, 137)">
       <text x="0" y="14" font-size="10" font-weight="600" fill="#818cf8">• Model Aditif Linear (WSM):</text>
-      <text x="12" y="32" font-size="12" font-weight="600" fill="#f0f6fc" font-family="'Courier New', monospace">Q<tspan font-size="8" dy="2">i</tspan><tspan font-size="8" dy="-4">(1)</tspan><tspan font-size="12" dy="2"> = </tspan><tspan font-size="16" fill="#818cf8">∑</tspan> w<tspan font-size="8" dy="2">j</tspan><tspan font-size="12" dy="-2"> · r</tspan><tspan font-size="8" dy="2">ij</tspan></text>
+      <text x="12" y="32" font-size="12" font-weight="600" fill="#f0f6fc" font-family="'Courier New', monospace">Qi(1) = <tspan font-size="16" fill="#818cf8">∑</tspan> wj · rij</text>
     </g>
 
     <!-- WPM -->
     <rect x="16" y="186" width="288" height="54" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1" />
     <g transform="translate(24, 199)">
       <text x="0" y="14" font-size="10" font-weight="600" fill="#c084fc">• Model Multiplikatif (WPM):</text>
-      <text x="12" y="32" font-size="12" font-weight="600" fill="#f0f6fc" font-family="'Courier New', monospace">Q<tspan font-size="8" dy="2">i</tspan><tspan font-size="8" dy="-4">(2)</tspan><tspan font-size="12" dy="2"> = </tspan><tspan font-size="16" fill="#c084fc">∏tspan> (r<tspan font-size="8" dy="2">ij</tspan><tspan font-size="12" dy="-2">)</tspan><tspan font-size="8" dy="-5">wj</tspan></text>
+      <text x="12" y="32" font-size="12" font-weight="600" fill="#f0f6fc" font-family="'Courier New', monospace">Qi(2) = <tspan font-size="16" fill="#c084fc">∏</tspan> (rij)^wj</text>
     </g>
 
     <!-- 2. Asimilasi Hibrida WASPAS -->
@@ -224,8 +211,8 @@
     <rect x="16" y="270" width="288" height="100" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1" />
     <g transform="translate(24, 290)">
       <text x="0" y="12" font-size="10" font-weight="600" fill="#e2e8f0">Skor Gabungan Integritas:</text>
-      <text x="8" y="38" font-size="13" font-weight="700" fill="#a78bfa" font-family="'Courier New', monospace">Q<tspan font-size="9" dy="3">i</tspan><tspan font-size="13" dy="-3"> = λ · Q</tspan><tspan font-size="9" dy="3">i</tspan><tspan font-size="9" dy="-5">(1)</tspan><tspan font-size="13" dy="2"> + (1 − λ) · Q</tspan><tspan font-size="9" dy="3">i</tspan><tspan font-size="9" dy="-5">(2)</tspan></text>
-      <text x="8" y="62" font-size="11" font-weight="600" fill="#38bdf8" font-family="'Courier New', monospace">Q<tspan font-size="8" dy="3">i</tspan><tspan font-size="11" dy="-3"> = 0.5·Q</tspan><tspan font-size="8" dy="3">i</tspan><tspan font-size="8" dy="-5">(1)</tspan><tspan font-size="11" dy="2"> + 0.5·Q</tspan><tspan font-size="8" dy="3">i</tspan><tspan font-size="8" dy="-5">(2)</tspan></text>
+      <text x="8" y="38" font-size="13" font-weight="700" fill="#a78bfa" font-family="'Courier New', monospace">Qi = λ · Qi(1) + (1 − λ) · Qi(2)</text>
+      <text x="8" y="62" font-size="11" font-weight="600" fill="#38bdf8" font-family="'Courier New', monospace">Qi = 0.5·Qi(1) + 0.5·Qi(2)</text>
     </g>
 
     <!-- 3. Ringkasan -->
